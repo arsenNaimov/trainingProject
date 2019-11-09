@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html>
 <body>
-    <div>{{some}}</div>
+
+    <form action="/logout" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <input type="submit" value="Sign Out"/>
+    </form>
+    <div>
+        <form method="post">
+            <input type="text" name="text" placeholder="Введите сообщение">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+            <input type="text" name="tag" placeholder="Тэг">
+            <input type="submit"placeholder="Добавить"></form>
+        </form>
+    </div>
+
+    <div>Список сообщений</div>
+    <form method="post" action="filter">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <input type="text" name="filter">
+        <input type="submit" placeholder="Найти">
+    </form>
+    {{#messages}}
+    <div>
+        <b>{{id}}</b>
+        <span>{{text}}</span>
+        <l>{{tag}}</l>
+        <strong>{{authorName}}</strong>
+    </div>
+    {{/messages}}
 </body>
 </html>
